@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA TLE Data Portal</title>
+    <style>
+        /* NASA Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Nasalization&family=Titillium+Web:wght@300;400;600;700&display=swap');
+
+        :root {
+            --nasa-blue: #0b3d91;
+            --nasa-red: #fc3d21;
+            --nasa-white: #ffffff;
+            --nasa-dark: #000000;
+            --nasa-light-blue: #6ec0f7;
+        }
+
+        body {
+            font-family: 'Titillium Web', sans-serif;
+            color: var(--nasa-white);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/static/nasaindexbgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--nasa-dark);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 3rem 2rem;
+            background-color: rgba(11, 61, 145, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(252, 61, 33, 0.3);
+            border: 2px solid var(--nasa-white);
+            backdrop-filter: blur(3px);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Nasalization', 'Titillium Web', sans-serif;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--nasa-white);
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(252, 61, 33, 0.5);
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nasa-red), var(--nasa-light-blue));
+            margin: 25px auto;
+            border-radius: 4px;
+        }
+
+        .description {
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-button {
+            background: linear-gradient(to right, var(--nasa-red), var(--nasa-blue));
+            color: var(--nasa-white);
+            border: none;
+            padding: 16px 32px;
+            font-family: 'Nasalization', 'Titillium Web', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(252, 61, 33, 0.3);
+        }
+
+        .nav-button:hover {
+            background: linear-gradient(to right, var(--nasa-blue), var(--nasa-red));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(252, 61, 33, 0.5);
+        }
+
+        /* NASA "meatball" logo inspired element */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--nasa-red), transparent 70%);
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        /* Fallback for Nasalization font */
+        @font-face {
+            font-family: 'Nasalization';
+            src: local('Arial Rounded MT Bold'), local('Helvetica Rounded'), 
+                 local('Verdana');
+            unicode-range: U+000-5FF;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .nav-button {
+                padding: 14px 28px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NASA TLE Data Portal</h1>
+        <p class="description">Access Two-Line Element (TLE) satellite orbital data from NASA's extensive database. Track satellite positions and orbital parameters with our comprehensive dataset.</p>
+        
+        <a href="/nasa/tle">
+            <button class="nav-button">View TLE Data</button>
+        </a>
+        <a href="/">
+            <button class="nav-button">Back to Main Home Page</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TLE Information</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nasalization&family=Titillium+Web:wght@300;400;600;700&display=swap');
+
+        :root {
+            --nasa-blue: #0b3d91;
+            --nasa-red: #fc3d21;
+            --nasa-white: #ffffff;
+            --nasa-dark: #000000;
+            --nasa-light-blue: #6ec0f7;
+            --nasa-gray: #e6e6e6;
+        }
+
+        body {
+            font-family: 'Titillium Web', sans-serif;
+            color: var(--nasa-white);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/static/nasasatbgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--nasa-dark);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 2rem;
+            margin: 2rem 0;
+            background-color: rgba(11, 61, 145, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(252, 61, 33, 0.3);
+            border: 2px solid var(--nasa-white);
+            backdrop-filter: blur(2px);
+        }
+
+        h1, h2 {
+            font-family: 'Nasalization', 'Titillium Web', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--nasa-white);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 0 0 10px rgba(252, 61, 33, 0.5);
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nasa-red), var(--nasa-light-blue));
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--nasa-white);
+            margin-top: 0;
+            border-bottom: 2px solid var(--nasa-red);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .tle {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--nasa-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(252, 61, 33, 0.1));
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: var(--nasa-light-blue);
+            font-weight: 600;
+        }
+
+        button, .back-link {
+            background: linear-gradient(to right, var(--nasa-red), var(--nasa-blue));
+            color: var(--nasa-white);
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Nasalization', 'Titillium Web', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(252, 61, 33, 0.3);
+        }
+
+        button:hover, .back-link:hover {
+            background: linear-gradient(to right, var(--nasa-blue), var(--nasa-red));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(252, 61, 33, 0.5);
+        }
+
+        .error {
+            color: var(--nasa-white);
+            background-color: rgba(252, 61, 33, 0.7);
+            padding: 1.2rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--nasa-white);
+            font-size: 1.1rem;
+        }
+
+        /* NASA "meatball" logo inspired elements */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--nasa-red), transparent 70%);
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            button, .back-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* If Nasalization font isn't available, use a fallback */
+        @font-face {
+            font-family: 'Nasalization';
+            src: local('Arial Rounded MT Bold'), local('Helvetica Rounded'), 
+                local('Verdana');
+            unicode-range: U+000-5FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{if .Error}}
+            <h1>Error</h1>
+            <p class="error">{{.Error}}</p>
+            <a href="/nasa/tle" class="back-link">Back to TLE Home</a>
+        {{else}}
+            {{if .TLEs}}
+                <h1>TLE Information</h1>
+                {{range .TLEs}}
+                    <div class="tle">
+                        <h2>{{.Name}}</h2>
+                        <p><strong>Satellite ID:</strong> {{.SatelliteID}}</p>
+                        <p><strong>Date:</strong> {{.Date}}</p>
+                        <p><strong>Line 1:</strong> {{.Line1}}</p>
+                        <p><strong>Line 2:</strong> {{.Line2}}</p>
+                        <p><strong>Type:</strong> {{.Type}}</p>
+                        <p><strong>ID:</strong> {{.ID}}</p>
+                    </div>
+                {{end}}
+                <a href="/nasa/tle" class="back-link">Back to TLE Home</a>
+            {{else}}
+                <h1>No Data</h1>
+                <p class="error">No TLE data available.</p>
+                <a href="/nasa/tle" class="back-link">Back to TLE Home</a>
+            {{end}}
+        {{end}}
+    </div>
+</body>
+</html>

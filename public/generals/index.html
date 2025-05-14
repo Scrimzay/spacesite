@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Exploration Portal</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+        }
+
+        /* Split Screen Container */
+        .split-screen {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Half Sections */
+        .half {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Background Images */
+        .nasa-half {
+            background: url('/static/nasaportalbgimage.jpg') center/cover no-repeat;
+        }
+
+        .spacex-half {
+            background: url('/static/spacexportalbgimage.jpg') center/cover no-repeat;
+        }
+
+        /* Overlay Effects */
+        .half::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        /* Company Names */
+        .company-name {
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-size: 5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-align: center;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            transition: all 0.5s ease;
+        }
+
+        .nasa-name {
+            font-family: 'Nasalization', sans-serif;
+            color: #fc3d21; /* NASA red */
+        }
+
+        .spacex-name {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff; /* SpaceX blue */
+        }
+
+        .spacex-final-name {
+            font-family: 'Roboto', sans-serif;
+            color: #ff6a14; /* SpaceX blue */
+        }
+
+        /* Hover Effects */
+        .half:hover {
+            flex: 1.5;
+        }
+
+        .half:hover::before {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .half:hover .company-name {
+            font-size: 6rem;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
+        }
+
+        /* NASA "meatball" logo effect */
+        .nasa-half::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #fc3d21, transparent 70%);
+            opacity: 0.5;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* SpaceX "X" logo effect */
+        .spacex-half::after {
+            content: 'X';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .split-screen {
+                flex-direction: column;
+            }
+
+            .company-name {
+                font-size: 3rem;
+            }
+
+            .half:hover {
+                flex: 1.2;
+            }
+
+            .half:hover .company-name {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Font for NASA */
+        @font-face {
+            font-family: 'Nasalization';
+            src: url('https://cdn.jsdelivr.net/gh/googlefonts/roboto@main/src/hinted/Roboto-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="split-screen">
+        <a href="/nasa" class="half nasa-half">
+            <h1 class="company-name nasa-name">NASA</h1>
+        </a>
+        <a href="/spacex" class="half spacex-half">
+            <h1 class="company-name spacex-name">Space</h1>
+            <h1 class="company-name spacex-final-name">X</h1>
+        </a>
+    </div>
+</body>
+</html>

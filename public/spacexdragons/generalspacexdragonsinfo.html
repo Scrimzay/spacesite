@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Dragons Information</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --spacex-dark: #000000;
+            --spacex-light: #ffffff;
+            --spacex-accent: #005288;
+            --spacex-accent-light: #0078c8;
+            --spacex-red: #d50000;
+            --spacex-gold: #ffd700;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--spacex-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/static/spacexdragonsbgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #000; /* Fallback */
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 2rem;
+            margin: 2rem 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 82, 136, 0.5);
+            border: 1px solid var(--spacex-accent-light);
+            backdrop-filter: blur(2px);
+        }
+
+        h1, h2, h3 {
+            color: var(--spacex-light);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--spacex-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--spacex-accent-light);
+            margin: 15px auto;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--spacex-accent-light);
+            border-bottom: 1px solid rgba(0, 82, 136, 0.5);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--spacex-gold);
+            margin-top: 1.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        strong {
+            color: var(--spacex-gold);
+        }
+
+        .dragon {
+            background-color: rgba(0, 82, 136, 0.15);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--spacex-accent-light);
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .dragon:hover {
+            background-color: rgba(0, 82, 136, 0.25);
+            box-shadow: 0 0 20px rgba(0, 82, 136, 0.3);
+        }
+
+        .section {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 2px solid var(--spacex-gold);
+        }
+
+        button, .back-link {
+            background-color: var(--spacex-accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        button:hover, .back-link:hover {
+            background-color: var(--spacex-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 82, 136, 0.6);
+        }
+
+        .error {
+            color: var(--spacex-red);
+            background-color: rgba(213, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--spacex-red);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{if .Error}}
+            <h1>Error</h1>
+            <p class="error">{{.Error}}</p>
+            <a href="/spacex/dragons" class="back-link">Back to Dragons Home</a>
+        {{else}}
+            {{if .Dragons}}
+                <h1>SpaceX Dragons Information</h1>
+                {{range .Dragons}}
+                    <div class="dragon">
+                        <h2>{{.Name}}</h2>
+                        <p><strong>Type:</strong> {{.Type}}</p>
+                        <p><strong>Active:</strong> {{.Active}}</p>
+                        <p><strong>First Flight:</strong> {{.FirstFlight}}</p>
+                        <p><strong>Crew Capacity:</strong> {{.CrewCapacity}}</p>
+                        <p><strong>Sidewall Angle:</strong> {{.SidewallAngleDeg}}°</p>
+                        <p><strong>Orbit Duration:</strong> {{.OrbitDurationYr}} years</p>
+                        <p><strong>Dry Mass:</strong> {{.DryMassKg}} kg ({{.DryMassLb}} lb)</p>
+                        <p><strong>Description:</strong> {{.Description}}</p>
+                        <p><strong>ID:</strong> {{.ID}}</p>
+                        <div class="section">
+                            <h3>Heat Shield</h3>
+                            <p><strong>Material:</strong> {{.HeatShield.Material}}</p>
+                            <p><strong>Size:</strong> {{.HeatShield.SizeMeters}} meters</p>
+                            <p><strong>Temp:</strong> {{.HeatShield.TempDegrees}}°C</p>
+                            <p><strong>Dev Partner:</strong> {{.HeatShield.DevPartner}}</p>
+                        </div>
+                        <div class="section">
+                            <h3>Launch Payload</h3>
+                            <p><strong>Mass:</strong> {{.LaunchPayloadMass.KG}} kg ({{.LaunchPayloadMass.LB}} lb)</p>
+                            <p><strong>Volume:</strong> {{.LaunchPayloadVol.CubicMeters}} m³ ({{.LaunchPayloadVol.CubicFeet}} ft³)</p>
+                        </div>
+                        <div class="section">
+                            <h3>Return Payload</h3>
+                            <p><strong>Mass:</strong> {{.ReturnPayloadMass.KG}} kg ({{.ReturnPayloadMass.LB}} lb)</p>
+                            <p><strong>Volume:</strong> {{.ReturnPayloadVol.CubicMeters}} m³ ({{.ReturnPayloadVol.CubicFeet}} ft³)</p>
+                        </div>
+                        <div class="section">
+                            <h3>Pressurized Capsule</h3>
+                            <p><strong>Volume:</strong> {{.PressurizedCapsule.PayloadVolume.CubicMeters}} m³ ({{.PressurizedCapsule.PayloadVolume.CubicFeet}} ft³)</p>
+                        </div>
+                        <div class="section">
+                            <h3>Trunk</h3>
+                            <p><strong>Volume:</strong> {{.Trunk.TrunkVolume.CubicMeters}} m³ ({{.Trunk.TrunkVolume.CubicFeet}} ft³)</p>
+                            <p><strong>Solar Array:</strong> {{.Trunk.Cargo.SolarArray}}</p>
+                            <p><strong>Unpressurized Cargo:</strong> {{.Trunk.Cargo.UnpressurizedCargo}}</p>
+                        </div>
+                        <div class="section">
+                            <h3>Dimensions</h3>
+                            <p><strong>Diameter:</strong> {{.Diameter.Meters}} m ({{.Diameter.Feet}} ft)</p>
+                            <p><strong>Height with Trunk:</strong> {{.HeightWithTrunk.Meters}} m ({{.HeightWithTrunk.Feet}} ft)</p>
+                        </div>
+                        {{if .Thrusters}}
+                            <div class="section">
+                                <h3>Thrusters</h3>
+                                {{range .Thrusters}}
+                                    <p><strong>Type:</strong> {{.Type}}</p>
+                                    <p><strong>Amount:</strong> {{.Amount}}</p>
+                                    <p><strong>Pods:</strong> {{.Pods}}</p>
+                                    <p><strong>Fuel 1:</strong> {{.Fuel1}}</p>
+                                    <p><strong>Fuel 2:</strong> {{.Fuel2}}</p>
+                                    <p><strong>ISP:</strong> {{.ISP}}</p>
+                                    <p><strong>Thrust:</strong> {{.ThrustForce.KN}} kN ({{.ThrustForce.LBF}} lbf)</p>
+                                {{end}}
+                            </div>
+                        {{end}}
+                    </div>
+                {{end}}
+                <a href="/spacex/dragons" class="back-link">Back to Dragons Home</a>
+            {{else}}
+                <h1>No Data</h1>
+                <p class="error">No dragons data available.</p>
+                <a href="/spacex/dragons" class="back-link">Back to Dragons Home</a>
+            {{end}}
+        {{end}}
+    </div>
+</body>
+</html>

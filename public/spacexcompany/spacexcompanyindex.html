@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Company</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --spacex-dark: #000000;
+            --spacex-light: #ffffff;
+            --spacex-accent: #005288;
+            --spacex-accent-light: #0078c8;
+            --spacex-red: #d50000;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--spacex-dark);
+            color: var(--spacex-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 82, 136, 0.3);
+            border: 1px solid var(--spacex-accent);
+        }
+
+        h1, h2 {
+            color: var(--spacex-light);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--spacex-accent-light);
+            margin-top: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--spacex-accent-light);
+            margin-top: 0;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        strong {
+            color: var(--spacex-accent-light);
+        }
+
+        .company {
+            background-color: rgba(0, 82, 136, 0.1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--spacex-accent-light);
+            margin-bottom: 2rem;
+        }
+
+        button, .back-link {
+            background-color: var(--spacex-accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        button:hover, .back-link:hover {
+            background-color: var(--spacex-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 82, 136, 0.4);
+        }
+
+        .error {
+            color: var(--spacex-red);
+            background-color: rgba(213, 0, 0, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--spacex-red);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SpaceX Company</h1>
+        <p>Explore SpaceX company information:</p>
+        <a href="/spacex/company/info"><button>View Company</button></a>
+        <a href="/spacex"><button>Back to SpaceX Home Page</button></a>
+    </div>
+</body>
+</html>

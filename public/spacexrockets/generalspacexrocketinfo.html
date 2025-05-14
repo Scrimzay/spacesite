@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Rockets</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Orbitron:wght@400;500;700&display=swap');
+
+        :root {
+            --spacex-dark: #000000;
+            --spacex-light: #ffffff;
+            --spacex-accent: #e82127; /* Rocket flame red */
+            --spacex-accent-light: #ff5a5f;
+            --spacex-metal: #a0a0a0; /* Rocket metal */
+            --spacex-orange: #ff6d00; /* Launch flame */
+            --spacex-blue: #005288;
+            --spacex-error: #ff3860;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--spacex-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('/static/spacexrocketsbgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #000;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            padding: 2rem;
+            margin: 2rem 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(232, 33, 39, 0.3);
+            border: 1px solid var(--spacex-metal);
+            backdrop-filter: blur(3px);
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--spacex-light);
+            text-shadow: 0 0 10px rgba(255, 109, 0, 0.5);
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--spacex-orange), var(--spacex-accent));
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--spacex-metal);
+            border-bottom: 2px solid var(--spacex-orange);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            color: var(--spacex-accent-light);
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        h3::before {
+            content: '➤';
+            color: var(--spacex-orange);
+            margin-right: 10px;
+        }
+
+        .rocket {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid var(--spacex-metal);
+            box-shadow: 0 0 20px rgba(255, 109, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rocket::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--spacex-orange), var(--spacex-accent));
+        }
+
+        .section {
+            background: rgba(30, 30, 30, 0.6);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--spacex-orange);
+            position: relative;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 109, 0, 0.1));
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: var(--spacex-orange);
+            font-weight: 500;
+        }
+
+        button, .back-link, input[type="submit"] {
+            background: linear-gradient(to bottom, var(--spacex-metal), #505050);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            border: 1px solid var(--spacex-metal);
+        }
+
+        button:hover, .back-link:hover, input[type="submit"]:hover {
+            background: linear-gradient(to bottom, var(--spacex-orange), var(--spacex-accent));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 109, 0, 0.6);
+            border-color: var(--spacex-orange);
+        }
+
+        form {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        input[type="text"] {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid var(--spacex-metal);
+            color: white;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            min-width: 300px;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--spacex-orange);
+            box-shadow: 0 0 10px rgba(255, 109, 0, 0.3);
+        }
+
+        .error {
+            color: var(--spacex-error);
+            background-color: rgba(255, 56, 96, 0.1);
+            padding: 1.2rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--spacex-error);
+            font-size: 1.1rem;
+        }
+
+        /* Animation for rocket sections */
+        @keyframes flamePulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .section h3::after {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--spacex-orange);
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: flamePulse 1.5s infinite;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .rocket {
+                padding: 1.5rem;
+            }
+            
+            input[type="text"] {
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>SpaceX Rockets Information</h1>
+    {{range .Rockets}}
+        <div class="rocket">
+            <h2>{{.Name}}</h2>
+            <p><strong>Type:</strong> {{.Type}}</p>
+            <p><strong>Active:</strong> {{.Active}}</p>
+            <p><strong>Stages:</strong> {{.Stages}}</p>
+            <p><strong>Boosters:</strong> {{.Boosters}}</p>
+            <p><strong>Cost per Launch:</strong> ${{.CostPerLaunch}}</p>
+            <p><strong>Success Rate:</strong> {{.SuccessRate}}%</p>
+            <p><strong>First Flight:</strong> {{.FirstFlight}}</p>
+            <p><strong>Country:</strong> {{.Country}}</p>
+            <p><strong>Company:</strong> {{.Company}}</p>
+            <p><strong>Description:</strong> {{.Description}}</p>
+            <p><strong>Height:</strong> {{.Height.Meters}} meters ({{.Height.Feet}} feet)</p>
+            <p><strong>Diameter:</strong> {{.Diameter.Meters}} meters ({{.Diameter.Feet}} feet)</p>
+            <p><strong>Mass:</strong> {{.Mass.Kg}} kg ({{.Mass.Lb}} lb)</p>
+
+            <div class="section">
+                <h3>First Stage</h3>
+                <p><strong>Thrust (Sea Level):</strong> {{.FirstStage.ThrustSeaLevel.KN}} kN ({{.FirstStage.ThrustSeaLevel.Lbf}} lbf)</p>
+                <p><strong>Thrust (Vacuum):</strong> {{.FirstStage.ThrustVacuum.KN}} kN ({{.FirstStage.ThrustVacuum.Lbf}} lbf)</p>
+                <p><strong>Reusable:</strong> {{.FirstStage.Reusable}}</p>
+                <p><strong>Engines:</strong> {{.FirstStage.Engines}}</p>
+                <p><strong>Fuel Amount:</strong> {{.FirstStage.FuelAmountTons}} tons</p>
+                <p><strong>Burn Time:</strong> {{.FirstStage.BurnTimeSec}} seconds</p>
+            </div>
+
+            <div class="section">
+                <h3>Second Stage</h3>
+                <p><strong>Thrust:</strong> {{.SecondStage.Thrust.KN}} kN ({{.SecondStage.Thrust.Lbf}} lbf)</p>
+                <p><strong>Reusable:</strong> {{.SecondStage.Reusable}}</p>
+                <p><strong>Engines:</strong> {{.SecondStage.Engines}}</p>
+                <p><strong>Fuel Amount:</strong> {{.SecondStage.FuelAmountTons}} tons</p>
+                <p><strong>Burn Time:</strong> {{.SecondStage.BurnTimeSec}} seconds</p>
+                <p><strong>Payload Option:</strong> {{.SecondStage.Payloads.Option1}}</p>
+                <p><strong>Composite Fairing:</strong> {{.SecondStage.Payloads.CompositeFairing.Meters}} meters ({{.SecondStage.Payloads.CompositeFairing.Feet}} feet)</p>
+            </div>
+
+            <div class="section">
+                <h3>Engines</h3>
+                <p><strong>ISP (Sea Level):</strong> {{.Engines.ISP.SeaLevel}}</p>
+                <p><strong>ISP (Vacuum):</strong> {{.Engines.ISP.Vacuum}}</p>
+                <p><strong>Thrust (Sea Level):</strong> {{.Engines.ThrustSeaLevel.KN}} kN ({{.Engines.ThrustSeaLevel.Lbf}} lbf)</p>
+                <p><strong>Thrust (Vacuum):</strong> {{.Engines.ThrustVacuum.KN}} kN ({{.Engines.ThrustVacuum.Lbf}} lbf)</p>
+                <p><strong>Number:</strong> {{.Engines.Number}}</p>
+                <p><strong>Type:</strong> {{.Engines.Type}}</p>
+                <p><strong>Version:</strong> {{.Engines.Version}}</p>
+                <p><strong>Layout:</strong> {{.Engines.Layout}}</p>
+                <p><strong>Max Engine Loss:</strong> {{.Engines.EngineLossMax}}</p>
+                <p><strong>Propellant 1:</strong> {{.Engines.Propellant1}}</p>
+                <p><strong>Propellant 2:</strong> {{.Engines.Propellant2}}</p>
+                <p><strong>Thrust to Weight:</strong> {{.Engines.ThrustToWeight}}</p>
+            </div>
+
+            <div class="section">
+                <h3>Landing Legs</h3>
+                <p><strong>Number:</strong> {{.LandingLegs.Number}}</p>
+                <p><strong>Material:</strong> {{.LandingLegs.Material}}</p>
+            </div>
+
+            <div class="section">
+                <h3>Payload Weights</h3>
+                {{range .PayloadWeights}}
+                    <p><strong>{{.Name}}:</strong> {{.Kg}} kg ({{.Lb}} lb)</p>
+                {{end}}
+            </div>
+
+            <p><strong>ID:</strong> {{.ID}}</p>
+        </div>
+    {{end}}
+    <a href="/spacex/rockets" class="back-link">Back to Rockets Home</a>
+</body>
+</html>

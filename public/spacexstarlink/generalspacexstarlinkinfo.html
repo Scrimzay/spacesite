@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Starlink Satellites</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Rajdhani:wght@500;600;700&display=swap');
+
+        :root {
+            --starlink-dark: #000033;
+            --starlink-light: #ffffff;
+            --starlink-accent: #00d8ff; /* Starlink blue */
+            --starlink-accent-dark: #0066cc;
+            --starlink-purple: #9933ff;
+            --starlink-metal: #c0c0c0;
+            --starlink-error: #ff3366;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--starlink-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('/static/spacexstarlinkbgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--starlink-dark);
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            padding: 2rem;
+            margin: 2rem 0;
+            background-color: rgba(0, 24, 72, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0, 216, 255, 0.2);
+            border: 1px solid var(--starlink-accent);
+            backdrop-filter: blur(4px);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--starlink-light);
+            text-shadow: 0 0 15px rgba(0, 216, 255, 0.5);
+            position: relative;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--starlink-accent), transparent);
+            margin: 20px auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--starlink-metal);
+            border-bottom: 1px solid var(--starlink-accent);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--starlink-accent);
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .satellite {
+            background: rgba(0, 12, 36, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid var(--starlink-purple);
+            box-shadow: 0 0 20px rgba(153, 51, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .satellite::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--starlink-accent), var(--starlink-purple));
+        }
+
+        .section {
+            background: rgba(0, 36, 72, 0.5);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+            border-left: 3px solid var(--starlink-accent);
+            position: relative;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at right, rgba(0, 216, 255, 0.05), transparent 70%);
+            pointer-events: none;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        strong {
+            color: var(--starlink-accent);
+            font-weight: 500;
+        }
+
+        button, .back-link, input[type="submit"] {
+            background: linear-gradient(135deg, var(--starlink-accent-dark), var(--starlink-accent));
+            color: var(--starlink-dark);
+            border: none;
+            padding: 14px 28px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 216, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        button:hover, .back-link:hover, input[type="submit"]:hover {
+            background: linear-gradient(135deg, var(--starlink-accent), var(--starlink-purple));
+            transform: translateY(-3px);
+            box-shadow: 0 7px 25px rgba(0, 216, 255, 0.5);
+            color: white;
+        }
+
+        form {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        input[type="text"] {
+            background: rgba(0, 24, 72, 0.8);
+            border: 1px solid var(--starlink-accent);
+            color: white;
+            padding: 14px 20px;
+            font-size: 1rem;
+            border-radius: 6px;
+            min-width: 300px;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--starlink-purple);
+            box-shadow: 0 0 15px rgba(153, 51, 255, 0.3);
+        }
+
+        .error {
+            color: var(--starlink-error);
+            background-color: rgba(255, 51, 102, 0.1);
+            padding: 1.2rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--starlink-error);
+            font-size: 1.1rem;
+        }
+
+        /* Constellation animation */
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--starlink-accent), transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        /* Satellite dish indicator */
+        .section h3::before {
+            content: '🛰️';
+            margin-right: 10px;
+            filter: hue-rotate(180deg);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .satellite {
+                padding: 1.5rem;
+            }
+            
+            input[type="text"] {
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{if .Error}}
+        <h1>Error</h1>
+        <p>{{.Error}}</p>
+        <a href="/spacex/starlink">Back to Starlink Home</a>
+    {{else}}
+        <h1>SpaceX Starlink Satellites Information</h1>
+        <a href="/spacex/starlink" class="back-link">Back to Starlink Home</a>
+        {{range .Satellites}}
+            <div class="satellite">
+                <h2>{{.SpaceTrack.ObjectName}}</h2>
+                <p><strong>ID:</strong> {{.ID}}</p>
+                <p><strong>Version:</strong> {{.Version}}</p>
+                <p><strong>Longitude:</strong> {{.Longitude}}°</p>
+                <p><strong>Latitude:</strong> {{.Latitude}}°</p>
+                <p><strong>Height:</strong> {{.HeightKM}} km</p>
+                <p><strong>Velocity:</strong> {{.VelocityKM}} km/s</p>
+                <div class="section">
+                    <h3>SpaceTrack Data</h3>
+                    <p><strong>Object ID:</strong> {{.SpaceTrack.ObjectID}}</p>
+                    <p><strong>Comment:</strong> {{.SpaceTrack.Comment}}</p>
+                    <p><strong>Creation Date:</strong> {{.SpaceTrack.CreationDate}}</p>
+                    <p><strong>Center Name:</strong> {{.SpaceTrack.CenterName}}</p>
+                    <p><strong>Time System:</strong> {{.SpaceTrack.TimeSystem}}</p>
+                    <p><strong>Epoch:</strong> {{.SpaceTrack.Epoch}}</p>
+                    <p><strong>Mean Motion:</strong> {{.SpaceTrack.MeanMotion}} rev/day</p>
+                    <p><strong>Eccentricity:</strong> {{.SpaceTrack.Eccentricity}}</p>
+                    <p><strong>Inclination:</strong> {{.SpaceTrack.Inclination}}°</p>
+                    <p><strong>Classification Type:</strong> {{.SpaceTrack.ClassificationType}}</p>
+                    <p><strong>Object Type:</strong> {{.SpaceTrack.ObjectType}}</p>
+                    <p><strong>Country Code:</strong> {{.SpaceTrack.CountryCode}}</p>
+                    <p><strong>Launch Date:</strong> {{.SpaceTrack.LaunchDate}}</p>
+                    <p><strong>Site:</strong> {{.SpaceTrack.Site}}</p>
+                    <p><strong>Decay Date:</strong> {{.SpaceTrack.DecayDate}}</p>
+                    <p><strong>Decayed:</strong> {{.SpaceTrack.Decayed}}</p>
+                    <p><strong>TLE Line 0:</strong> {{.SpaceTrack.TLELine0}}</p>
+                    <p><strong>TLE Line 1:</strong> {{.SpaceTrack.TLELine1}}</p>
+                    <p><strong>TLE Line 2:</strong> {{.SpaceTrack.TLELine2}}</p>
+                </div>
+            </div>
+        {{end}}
+    {{end}}
+</body>
+</html>
